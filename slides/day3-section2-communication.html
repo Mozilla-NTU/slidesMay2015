@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HTML5 Communications</title>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js-2.6.2/lib/css/zenburn.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>HTML5 Communications</h2>
+        </section>
+        <section>
+          <h3>Cross Document Messaging</h3>
+          <h3>XMLHttpRequest Level 2</h3>
+          <h3>ServerSent Event</h3>
+          <h3>WEBSOCKET</h3>
+        </section>
+        <section>
+          <section><h2>Cross Document Messaging</h2></section>
+          <section>
+            <h3>postMessage API</h3>
+            <dl class="text-left">
+              <dt>sender</dt>
+              <pre><code>
+senderWindow.postMessage("hi there", "http://receiver.site");
+              </code></pre>
+              <dt>receiver</dt>
+              <pre><code>
+receiverWindow.onmessage = function (event) {
+  if (event.origin !== "http://sender.site") {
+    return;
+  }
+  console.log('received message: ' + event.data);
+};
+              </code></pre>
+            </dl>
+          </section>
+
+          <section>
+            <h2>whether it supports ?</h2>
+              <pre><code>
+if (window.postMessage) {
+  console.log("postMessage not supported in this browser")
+}
+            </code></pre>            
+          </section>
+        </section>
+        <section>
+          <h2>XMLHttpRequest Level 2</h2>
+          <ul>
+            <li>Cross-origin XMLHttpRequests</li>
+            <li>Progress events</li>
+            <li>Binary Data</li>
+          </ul>
+        </section>
+        <section>
+          <section><h2>ServerSent Event</h2></section>
+          <section>
+            <dl class="text-left">
+              <dt>Receiving data from server</dt>
+              <pre><code>              
+var evtSource = new EventSource("/event-source"); 
+evtSource.onmessage = function(e) {
+     console.log(e.data);
+}
+              </code></pre>
+              <dt>Sending data from server</dt>
+              <pre><code>
+get "/event-source" do
+     response.headers['Content-Type'] = 'text/event-stream'
+     while (1) {
+           return "data: message from server \n\n"
+           wait_random_time
+     }
+end                
+              </code></pre>
+            </dl>
+          </section>
+        </section>
+        <section>
+          <section><h2>WebSocket</h2></section>
+          <section>
+            <blockquote>
+              “Reducing kilobytes of data to 2 bytes…and reducing latency from 150 ms to 50 ms is far more than marginal. In fact, these two factors alone are enough to make WebSocket seriously interesting to Google.” 
+            </blockquote>
+          </section>
+          <section>
+            <h2>For RealTime</h2>
+            <dl class="text-left">
+              <dt>Protocol</dt>
+              <dd>allows for a persistent, full-duplex communication between a client and remote host.</dd>
+              <dt>HTML5</dt>
+              <dd>defines a JavaScript API for the WebSocket protocol within the browser, allowing bi-directional communication between the browser and server.</dd>
+            </dl>
+          </section>
+        </section>
+        <section>
+          <h2>Why ?</h2>
+          <p> Web apps need to communicate with server in real-time </p>
+        </section>
+        <section>
+          <h2>Can't we already do that ?</h2>
+        </section>
+        <section>
+          <section>
+            <h2>Ajax Polling</h2>
+            <p>Client sends AJAX request to server, server responds</p>
+            <img src="../img/wangyan/ajax-polling.jpg" width="500">
+          </section>
+          <section>
+            <div class="text-left">
+              <h3>Works When:</h3>
+              <ul>
+                <li>client needs to request data occasionally</li>
+                <li>client needs to send data occasionally</li>
+              </ul>
+            </div>
+            <br>
+            <div class="text-left">
+              <h3>Falls short When:</h3>
+              <ul>
+                <li>client needs to send data often</li>
+                <li>server needs to iniate and send data without client request</li>
+              </ul>
+            </div>            
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>AJAX Long-polling</h2>
+            <p style="font-size: 26px;">Client sends AJAX request to server, server keeps request open until response available.<br>
+            Client immediately sends another long-poll request after receiving response
+            </p>
+            <img src="../img/wangyan/ajax-long-polling.png" width="500">
+          </section>
+          <section>
+            <div class="text-left">
+              <h3>Works When:</h3>
+              <ul>
+                <li>client needs to request one or a few pieces of data at a time</li>
+                <li>server needs to send one or a few pieces of data occastionally</li>
+              </ul>
+            </div>
+            <br>
+            <div class="text-left">
+              <h3>Falls short When:</h3>
+              <ul>
+                <li>client needs to send data often</li>
+                <li>client needs initiate and send data when available</li>
+                <li>server needs to send data often</li>
+              </ul>
+            </div>            
+          </section>          
+        </section>
+        <section>
+          <section>
+            <h2>Server-Sent Events(SSE)</h2>
+            <p style="font-size: 26px;">Client opens connection with server<br>
+            Server sends data to client as it becomes available 
+            </p>
+            <img src="../img/wangyan/sse.png" width="500">
+          </section>
+          <section>
+            <div class="text-left">
+              <h3>Works When:</h3>
+              <ul>
+                <li>server needs to send data often</li>
+                <li>browser support for WebSockets can't be relied upon</li>
+              </ul>
+            </div>
+            <br>
+            <div class="text-left">
+              <h3>Falls short When:</h3>
+              <ul>
+                <li>client needs to send any data</li>
+              </ul>
+            </div>            
+          </section>          
+        </section>
+        <section>
+          <section>
+            <h2>WEBSOCKETS</h2>
+            <p style="font-size: 26px;">Client opens connection with server<br>
+            Client and server send data to each other as data becomes available on either side 
+            </p>
+            <img src="../img/wangyan/websockets.png" width="500">
+          </section>
+          <section>
+            <div class="text-left">
+              <h3>Works When:</h3>
+              <ul>
+                <li>server and/or client need to send data often</li>
+                <li>browser support for WebSockets can be relied upon or fallbacks can be used</li>
+              </ul>
+            </div>
+            <br>
+            <div class="text-left">
+              <h3>Falls short When:</h3>
+              <ul>
+                <li>fallbacks can't be relied upon</li>
+              </ul>
+            </div>            
+          </section>          
+        </section>
+        <section>
+           <h2>how it works ?</h2>
+        </section>
+        <section>
+          <section>
+            <h2>HTTP Handshake</h2>
+          </section>
+          <section>
+            <h2>Request</h2>
+            <pre><code>
+GET ws://echo.websocket.org/?encoding=text HTTP/1.1
+Origin: http://websocket.org
+Cookie: __utma=99as
+Connection: Upgrade
+Host: echo.websocket.org
+Sec-WebSocket-Key: uRovscZjNol/umbTt5uKmw==
+Upgrade: websocket
+Sec-WebSocket-Version: 13
+            </code></pre>
+          </section>
+          <section>
+            <h2>Response</h2>
+            <pre><code>
+HTTP/1.1 101 WebSocket Protocol Handshake
+Date: Fri, 10 Feb 2012 17:38:18 GMT
+Connection: Upgrade
+Server: Kaazing Gateway
+Upgrade: WebSocket
+Access-Control-Allow-Origin: http://websocket.org
+Access-Control-Allow-Credentials: true
+Sec-WebSocket-Accept: rLHCkw/SKsO9GAH/ZSFhBATDKrU=
+Access-Control-Allow-Headers: content-type             
+            </code></pre>
+          </section>
+          <section>
+            <h2>Full-duplex Connections</h2>
+          </section>
+        </section>
+        <section>
+          <section><h2>WebSocket API</h2></section>
+          <section>
+            <h2>URI Structure</h2>
+            <p>Define new protocols, ws:// and wss:// </p>
+          </section>
+          <section>
+            <h2>Setup Connection</h2>
+            <pre><code>
+var connection = new WebSocket('ws://subdomain.examnple.com/some-endpoint')
+            </code></pre>
+          </section>
+          <section>
+            <h2>Listen Event</h2>
+            <pre><code>
+connection.onopen = function(e) {
+  console.log("Connected");
+};
+
+connection.onmessage = function(e) {
+  console.log( "Received: " + e.data);
+};
+
+connection.onclose = function(e) {
+  console.log("Connection closed");
+};              
+
+connection.onerror = function(e) {
+  console.log("There are some errors: e.data");
+};              
+
+            </code></pre>
+          </section>
+          <section>
+            <h2>Message Date Formate</h2>
+            <ul>
+              <li>String</li>
+              <li>ArrayBuffer</li>
+              <li>Blob</li>
+            </ul>
+          </section>
+          <section>
+            <h2>not support JSON ?</h2>
+            <p class="fragment">
+              using JSON.stringify and JSON.parse to handle it
+            </p>
+          </section>
+        </section>
+        <section>
+          <section><h2>WEBSOCKET SERVER</h2></section>
+          <section>
+            <h2>Many Choices</h2>
+            <p>Server can be built in any language</p>
+            <p>Existed libraries for nodejs, ruby, python, php</p>
+          </section>
+          <section>
+            <h2>Socket.io is awesome</h2>
+          </section>
+          <section>
+            <h2>Easy to use</h2>
+            <pre><code class="javascript">
+var io = require('socket.io').listen(80);
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});              
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Use Cases</h2>
+          <ul>
+            <li>Games</li>
+            <li>Notifications</li>
+            <li>Collaboration</li>
+            <li>Statistics</li>
+            <li>Chat</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Demo</h2>
+          <a href="http://ntu.meteor.com" target="_blank">last mile</a>
+        </section>
+      </div>
+    </div>
+    <script src="../reveal.js-2.6.2/lib/js/head.min.js"></script>
+    <script src="../reveal.js-2.6.2/js/reveal.js"></script>
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '../reveal.js-2.6.2/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../reveal.js-2.6.2/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../reveal.js-2.6.2/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '../reveal.js-2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../reveal.js-2.6.2/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '../reveal.js-2.6.2/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+  </body>
+</html>
+
