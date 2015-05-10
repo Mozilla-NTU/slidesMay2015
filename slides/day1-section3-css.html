@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CSS Basics</title>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/reveal.min.css"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/theme/default.css" id="theme"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/lib/css/zenburn.css"/>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Your content goes here -->
+        <section>
+          <h1>CSS Basics</h1>
+        </section>
+        <section>
+          <section>
+            <h1>What is CSS?</h1>
+          </section>
+          <section>
+            <h1>CSS</h1>
+            <h2>
+              C<small style="vertical-align: bottom;">ascading</small>
+              S<small style="vertical-align: bottom;">tyle</small>
+              S<small style="vertical-align: bottom;">heets</small>
+            </h2>
+          </section>
+          <section>
+            <h3>The <span style="color: yellow;">"how"</span> of displaying HTML elements</h3>
+            <pre><code style="text-align: center; font-size: 2rem;"><span style="color: yellow;">"how"</span></code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Before CSS</h1>
+            <br />
+            <pre><code style="text-align: center; font-size: 2rem;"><h2>Hello World</h2></code></pre>
+            <h2>Hello World</h2>
+          </section>
+          <section>
+            <h1>After CSS</h1>
+            <br />
+            <pre><code style="text-align: center;">
+              <h2 style="color: lightgreen; font-style: italic;">Hello World</h2>
+            </code></pre>
+            <h2 style="color: lightgreen; font-style: italic;">Hello World</h2>
+          </section>
+        </section>
+        <section>
+          <h1>Syntax</h1>
+          <pre><code class="css">
+            element { property: value; } /* Pseudo-code */</h2>
+          </code></pre>
+          <pre><code class="css">
+            h1      { color:    green; } /* For Realz!!! */</h2>
+          </code></pre>
+        </section>
+        <section>
+          <section>
+            <h2>How to use CSS?</h2>
+            <br />
+            <h3>Method 1: Inline CSS</h3>
+            <pre><code>
+              <p>
+                I am a Paragraph.
+              </p>
+            </code></pre>
+            <pre><code>
+              <p style="text-align: center;">
+                I am a Paragraph.
+              </p>
+            </code></pre>
+          </section>
+          <section>
+            <h2>How to use CSS?</h2>
+            <br />
+            <h3>Method 2: Internal CSS</h3>
+            <pre><code>
+              <style type="text/css">
+                p { text-align: center; }
+              </style>
+
+              <p>
+                I am a Paragraph.
+              </p>
+            </code></pre>
+          </section>
+          <section>
+            <h2>How to use CSS?</h2>
+            <br />
+            <h3>Method 3: External CSS</h3>
+            <pre><code class="css">
+              p { text-align: center; } /* Filename: style.css */
+            </code></pre>
+            <pre><code>
+              <link rel="stylesheet" type="text/css" href="style.css">
+
+              <p>I am a Paragraph.</p>  <!-- Filename: page.html -->
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Selectors</h1>
+            <h3>(are sort of filters, to...)</h3>
+            <p>Find matching HTML element(s) based on their <em>type, #id, .class, [attribute]</em> etc.</p>
+          </section>
+          <section>
+            <h1>Selectors: Type</h1>
+            <pre><code>
+              <style> h1 { font-size: 32px; } </style>
+
+              <h1>Hello World!</h1>
+            </code></pre>
+          </section>
+          <section>
+            <h1>Selectors: IDs</h1>
+            <pre><code>
+              <style> #title { font-size: 32px; } </style>
+
+              <h1 id="title">Hello World!</h1>
+            </code></pre>
+          </section>
+          <section>
+            <h1>Selectors: Classes</h1>
+            <pre><code>
+              <style> .subtitle { font-size: 32px; } </style>
+
+              <h2 class="subtitle">Hello World!</h2>
+            </code></pre>
+          </section>
+          <section>
+            <h1>Selectors: Advanced</h1>
+            <pre><code>
+              <style>
+                *::selection { background: rgba(0, 0, 0, 0.1); }
+                a.external:hover { text-decoration: underline; }
+              </style>
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Priorities</h1>
+            <h3 class="fragment">By Declaration Sources:</h3>
+            <ul>
+              <li class="fragment">Browser Defaults</li>
+              <li class="fragment">External Styles</li>
+              <li class="fragment">Internal Styles</li>
+              <li class="fragment">Inline Styles</li>
+            </ul>
+          </section>
+          <section>
+            <h1>Priorities</h1>
+            <h3 class="fragment">By Declaration Specificity:</h3>
+            <ul>
+              <li class="fragment">Universal Selector</li>
+              <li class="fragment">Type Selector</li>
+              <li class="fragment">Class Selector</li>
+              <li class="fragment">Attribute Selector</li>
+              <li class="fragment">Pseudo Selector</li>
+              <li class="fragment">ID Selector</li>
+              <li class="fragment">Inline Styles</li>
+              <li class="fragment"><em style="color: yellow;">!important</em> Override</li>
+            </ul>
+          </section>
+          <section>
+            <h1>Priorities</h1>
+            <h3 class="fragment">By Declaration Order:</h3>
+            <p class="fragment">Last declaration will, ALWAYS, take effect for <em>multiple styles</em> applied to same element/selector.</p>
+            <pre class="fragment"><code>
+              <h3 style="color: green; color: yellow;">Cascading Effect</h3>
+            </code></pre>
+            <h3 class="fragment" style="color: green; color: yellow;">Cascading Effect</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Layouts</h1>
+            <h3>By Display Types</h3>
+            <img src="../images/inline-n-block.png">
+            <p class="fragment">Plus some more <em>advanced</em> display properties, e.g. inline-block, table, flex etc.</p>
+          </section>
+          <section>
+            <h1>Layouts</h1>
+            <h3>By Positioning</h3>
+            <ul>
+              <li class="fragment">Static</li>
+              <li class="fragment">Relative</li>
+              <li class="fragment">Absolute</li>
+              <li class="fragment">Fixed</li>
+            </ul>
+          </section>
+          <section>
+            <h1>Layouts</h1>
+            <h3>By Box Model</h3>
+            <img src="../images/boxModel.png">
+          </section>
+          <section>
+            <h1>Layouts</h1>
+            <h3>By Advanced Methods</h3>
+            <ul>
+              <li class="fragment">Media Queries</li>
+              <li class="fragment">Grid System</li>
+              <li class="fragment">Flexbox</li>
+              <li class="fragment">Clear, Float, Indent etc.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h1>Thanks!</h1>
+          <h3>Questions?</h3>
+        </section>
+        <!-- End of your content -->
+      </div>
+    </div>
+    <script src="../reveal.js-2.6.2/lib/js/head.min.js"></script>
+    <script src="../reveal.js-2.6.2/js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        dependencies: [
+           { src: '../reveal.js-2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        ],
+      });
+    </script>
+  </body>
+</html>
