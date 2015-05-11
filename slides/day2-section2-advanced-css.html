@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Advanced CSS</title>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/reveal.min.css"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/theme/default.css" id="theme"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/lib/css/zenburn.css"/>
+    <style type="text/css">
+    .reveal .footnote {
+      font-size: 0.8em;
+      margin-top: 2em;
+    }
+    .reveal .lowercase {
+      text-transform: lowercase;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Your content goes here -->
+        <section>
+          <h1>Advanced CSS</h1>
+        </section>
+        <section>
+          <h2>CSS: what we know</h2>
+          <br />
+          <ul>
+            <li class="fragment">Syntax &amp; Usage</li>
+            <li class="fragment">Basic selectors</li>
+            <li class="fragment">Priority &amp; cascading</li>
+            <li class="fragment">Basic layout strategies</li>
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h1>Units in CSS</h1>
+            <br />
+            <ul>
+              <li class="fragment">Absolute: px, pc, pt, cm, mm, in</li>
+              <li class="fragment">Relative: em, rem, ex, ch, %</li>
+              <li class="fragment">Viewport: vh, vw, vmax, vmin</li>
+            </ul>
+            <p class="fragment footnote">
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">MDN Reference</a>
+            </p>
+          </section>
+          <section>
+            <h2>Absolute Units</h2>
+            <h3 class="lowercase">px, pc, pt, cm, mm, in</h3>
+            <br />
+            <pre><code class="css">
+              img { border-width: 2px; }
+            </code></pre>
+          </section>
+          <section>
+            <h2>Relative Units</h2>
+            <h3 class="lowercase">em, rem, ex, ch, %</h3>
+            <br />
+            <pre><code class="css">
+              h1 { font-size: 3rem; }
+            </code></pre>
+          </section>
+          <section>
+            <h2>Viewport Units</h2>
+            <h3 class="lowercase">vh, vw, vmax, vmin</h3>
+            <br />
+            <pre><code class="css">
+              section { width: 80vw; }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Colors in CSS</h1>
+            <br />
+            <ul>
+              <li class="fragment">Color Names</li>
+              <li class="fragment">Hex Codes</li>
+              <li class="fragment">RGB/RGBA</li>
+              <li class="fragment">HSL/HSLA</li>
+            </ul>
+            <p class="fragment footnote">
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">MDN Reference</a>
+            </p>
+          </section>
+          <section>
+            <h2>Color Names</h2>
+            <br />
+            <pre><code class="css">
+              p {
+                color: grey;
+                border-color: teal;
+                background-color: green;
+              }
+            </code></pre>
+          </section>
+          <section>
+            <h2>Hex Codes</h2>
+            <br />
+            <pre><code class="css">
+              p {
+                color: #808080;
+                border-color: #008080;
+                background-color: #008000;
+              }
+            </code></pre>
+          </section>
+          <section>
+            <h2>RGB/RGBA</h2>
+            <br />
+            <pre><code class="css">
+              p {
+                color: rgb(128, 128, 128);
+                border-color: rgb(0, 128, 128);
+                background-color: rgba(0, 128, 0, 0.5);
+              }
+            </code></pre>
+          </section>
+          <section>
+            <h2>HSL/HSLA</h2>
+            <br />
+            <pre><code class="css">
+              p {
+                color: hsl(0, 0, 50%);
+                border-color: rgb(180, 100%, 50%);
+                background-color: rgba(120, 100%, 50%, 0.5);
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Responsive Design</h2>
+          <br />
+          <ul>
+            <li class="fragment">Fluid Layout</li>
+            <li class="fragment">Media Queries</li>
+            <li class="fragment">Touch Interfaces</li>
+            <li class="fragment">Viewport Orientation</li>
+          </ul>
+          <p class="fragment footnote">
+            <a href="https://developer.mozilla.org/en-US/docs/Web_Development/Responsive_Web_design">MDN Reference</a>
+          </p>
+        </section>
+        <section>
+          <section>
+            <h2>Advanced Selectors</h2>
+            <br />
+            <ul>
+              <li class="fragment">Pseudo Elements &amp; Classes</li>
+              <li class="fragment">Relational Combinators</li>
+              <li class="fragment">Media Queries</li>
+            </ul>
+            <p class="fragment footnote">
+              <a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS_Selector">MDN Reference</a>
+            </p>
+          </section>
+          <section>
+            <h2>Pseudo Selectors</h2>
+            <br />
+            <pre><code class="css">
+              *::selection { background: #eee; } /* Pseudo-element */
+              a:hover { color: #c00; }           /* Pseudo-class   */
+            </code></pre>
+          </section>
+          <section>
+            <h2>Relational Combinators</h2>
+            <br />
+            <pre><code class="css">
+              nav h1 { font-weight: normal; }    /* Descendant */
+              ul > li { font-style: italic; }    /* Child */
+              h1 + p { font-weight: bold; }      /* Sibling */
+              a.portal { font-size: 1.5rem; }    /* Specificity */
+            </code></pre>
+          </section>
+          <section>
+            <h2>Media Queries</h2>
+            <br />
+            <pre><code class="css">
+              @media print {
+                body { backgorund: #fff; }
+              }
+              @media screen and (max-width: 800px) {
+                nav ul { display: block; }
+              }
+              @media screen and (min-aspect-ratio: 1/1) {
+                /* Apply rules for landscape orientation */
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Advanced Layouts</h2>
+            <br />
+            <ul>
+              <li class="fragment">Display</li>
+              <li class="fragment">Position</li>
+            </ul>
+            <p class="fragment footnote">
+              <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Layout">MDN Reference</a>
+            </p>
+          </section>
+          <section>
+            <h2>Display</h2>
+            <br />
+            <pre><code class="css">
+              nav {
+                display: flex;
+                flex-direction: row;
+              }
+              .portal { display: inline-block; }
+            </code></pre>
+          </section>
+          <section>
+            <h2>Position</h2>
+            <br />
+            <pre><code class="css">
+              nav {
+                top: 0;
+                position: fixed;
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>What have we learned?</h2>
+          <ul>
+            <li class="fragment">CSS Units</li>
+            <li class="fragment">CSS Colors</li>
+            <li class="fragment">Responsiveness Basics</li>
+            <li class="fragment">Advanced Selectors</li>
+            <li class="fragment">Advanced Layouts</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Thanks!</h1>
+          <h3>Questions?</h3>
+        </section>
+        <!-- End of your content -->
+      </div>
+    </div>
+    <script src="../reveal.js-2.6.2/lib/js/head.min.js"></script>
+    <script src="../reveal.js-2.6.2/js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        dependencies: [
+           { src: '../reveal.js-2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        ],
+      });
+    </script>
+  </body>
+</html>
