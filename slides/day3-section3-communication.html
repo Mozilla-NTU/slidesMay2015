@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Communication</title>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/reveal.min.css"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/css/theme/default.css" id="theme"/>
+    <link rel="stylesheet" href="../reveal.js-2.6.2/lib/css/zenburn.css"/>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Your content goes here -->
+        <section>
+          <h1>Communication APIs</h1>
+          How do we leverage the Internet to interconnect multiple applications?
+        </section>
+        <section>
+          <h2>Cross Document Messaging</h2>
+          <pre><code class="javascript">
+            // http://a.com
+            var win = window.open("http://b.com");
+            win.postMessage("hello world");
+
+            // http://b.com
+            window.onmessage = function (e) {
+              if (e.origin !== "a.com") {
+                return;
+              }
+              console.log("received message: ", event.data);
+            };
+          </code></pre>
+        </section>
+        <section>
+          <h2>Network Requests</h2>
+          <p>A browser makes requests for HTML, CSS, JS, and image files via HTTP.</p>
+          <img src="../images/requests.jpg" alt="requests"/>
+        </section>
+        <section>
+          <h2>Life of a browser request</h2>
+          <img src="../images/request.jpg" alt="request"/>
+        </section>
+        <section>
+          <h2>HTTP vs DNS</h2>
+          <img src="../images/http.jpg" alt="http"/>
+          <img src="../images/dns.jpg" alt="http"/>
+        </section>
+        <section>
+          <h2>HTTP Request</h2>
+          <pre><code class="http">
+            GET /intdex.html HTTP/1.1
+            HOST: www.example.com
+          </code></pre>
+          <h2>HTTP Response</h2>
+          <pre><code class="http">
+            HTTP/1.1 200 OK
+            Content-Type: text/html; charset=utf-8
+            Content-Length: 11
+
+            Hello World
+          </code></pre>
+        </section>
+        <section>
+          <p>How do we create a request after the page has loaded?</p>
+          <p class="fragment">JavaScript</p>
+        </section>
+        <section>
+          <h2>AJAX</h2>
+          <p>Asynchronous JavaScript and XML</p>
+          <small>Not so much XML anymore.</small>
+          <p>Used for background HTTP requests after the page has loaded.</p>
+        </section>
+        <section>
+          <h2>AJAX</h2>
+          <pre><code class="javascript">
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/cats.jpg');
+            xhr.onload = function () {
+              console.log(xhr.response);
+            };
+            xhr.send();
+          </code></pre>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">
+            More info on AJAX methods
+          </a>
+        </section>
+        <section>
+          <p>HTTP is response/response based.</p>
+          <p class="fragment">What if the server has an update for the client?</p>
+          <p class="fragment">Poll too much; waste network requests.</p>
+          <p class="fragment">Poll not enough; extra latency.</p>
+        </section>
+        <section>
+          <h2>WebSockets</h2>
+          <img src="../images/http.jpg" alt="http"/>
+          <img src="../images/websockets.jpg" alt="websockets"/>
+          <p>WebSockets allow for bidirectional full duplex communication.</p>
+        </section>
+        <section>
+          <pre><code class="javascript">
+            var ws = new WebSocket("ws://a.com");
+
+            ws.onopen = function () { console.log("connected"); };
+            ws.onerror = function (e) { console.error(e); };
+            ws.onclose = function () { console.log("connection lost"); };
+
+            ws.onmessage = function (e) {
+              console.log("received message:", e.data);
+            };
+          </code></pre>
+        </section>
+        <!-- End of your content -->
+      </div>
+    </div>
+    <script src="../reveal.js-2.6.2/lib/js/head.min.js"></script>
+    <script src="../reveal.js-2.6.2/js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        dependencies: [
+           { src: '../reveal.js-2.6.2/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        ],
+      });
+    </script>
+  </body>
+</html>
+
