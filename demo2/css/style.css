@@ -2,14 +2,14 @@ body {
   background-color: rgba(200, 200, 20, 0.5);
 }
 
-#headshot {
-  float: left;
-  margin-right: 50px;
-  height: 140px;
+#header {
+  text-align: center;
 }
 
-#myName {
-  font-weight: bold;
+#headshot {
+  height: 140px;
+  padding: 10px;
+  background-color: white;
 }
 
 #myMajor {
