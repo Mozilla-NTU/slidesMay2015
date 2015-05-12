@@ -1,0 +1,30 @@
+body {
+  background-color: rgba(200, 200, 20, 0.5);
+}
+
+#headshot {
+  float: left;
+  margin-right: 50px;
+  height: 140px;
+}
+
+#myName {
+  font-weight: bold;
+}
+
+#myMajor {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#inputBox {
+  clear: both;
+}
+
+#messageBox {
+  margin-top: 20px;
+  min-height: 50px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px;
+}
