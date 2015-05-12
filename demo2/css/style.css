@@ -1,3 +1,50 @@
+@keyframes hueRotation {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes spinY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1) rotateZ(0deg);
+  }
+  to {
+    transform: scale(0.5) rotateZ(360deg);
+  }
+}
+
+#kaustav {
+  animation-name: hueRotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+#nick:hover {
+  animation-name: spinY;
+  animation-duration: 1s;
+}
+
+#deb:hover {
+  animation-name: shrink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
 html {
   font-size: 16px;
 }
