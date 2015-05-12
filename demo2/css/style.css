@@ -1,0 +1,30 @@
+body {
+  background-color: rgba(200, 200, 20, 0.5);
+}
+
+#header {
+  text-align: center;
+}
+
+#headshot {
+  height: 140px;
+  padding: 10px;
+  background-color: white;
+}
+
+#myMajor {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#inputBox {
+  clear: both;
+}
+
+#messageBox {
+  margin-top: 20px;
+  min-height: 50px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px;
+}
