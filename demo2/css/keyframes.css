@@ -1,0 +1,90 @@
+@-webkit-keyframes hueRotation {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes hueRotation {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spinY {
+  from {
+    -webkit-transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateY(360deg);
+  }
+}
+
+@keyframes spinY {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/*to get this to work in safari and chrome*/
+@-webkit-keyframes shrink {
+  from {
+    -webkit-transform: scale(1) rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: scale(0.5) rotateZ(360deg);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1) rotateZ(0deg);
+  }
+  to {
+    transform: scale(0.5) rotateZ(360deg);
+  }
+}
+
+#kaustav {
+  -webkit-animation-name: hueRotation;
+  -webkit-animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+
+  animation-name: hueRotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+#nick:hover {
+  -webkit-animation-name: spinY;
+  -webkit-animation-duration: 1s;
+
+  animation-name: spinY;
+  animation-duration: 1s;
+}
+
+#deb:hover {
+  /*thanks browser vendors*/
+  -webkit-animation-name: shrink;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+
+  animation-name: shrink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
