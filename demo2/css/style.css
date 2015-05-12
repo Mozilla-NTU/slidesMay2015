@@ -1,20 +1,31 @@
+html {
+  font-size: 16px;
+}
 body {
-  background-color: rgba(200, 200, 20, 0.5);
+  background-color: #eee;
 }
 
-#header {
+nav {
+  display: flex;
   text-align: center;
+  flex-direction: column;
 }
 
-#headshot {
+nav h2 {
+  font-size: 3rem;
+}
+
+section {
+  margin: 5rem auto;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+.headshot {
   height: 140px;
-  padding: 10px;
+  padding: 0.5rem;
+  margin: 2rem;
+  float: left;
   background-color: white;
-}
-
-#myMajor {
-  font-style: italic;
-  text-decoration: underline;
 }
 
 #inputBox {
@@ -27,4 +38,10 @@ body {
   background-color: white;
   border: 2px solid black;
   padding: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  nav h2 {
+    font-size: 2rem;
+  }
 }
