@@ -54,7 +54,7 @@ new (require("ws").Server)({ port: PORT }).on("connection", function (socket) {
     if (validationFail) {
       try {
         socket.send(serverError(validationFail));
-      } catch () {
+      } catch (_) {
         console.error("tried to close a socket that the client already closed");
       }
       console.log(msg + " -> " + validationFail);
