@@ -1,0 +1,47 @@
+html {
+  font-size: 16px;
+}
+body {
+  background-color: #eee;
+}
+
+nav {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+nav h2 {
+  font-size: 3rem;
+}
+
+section {
+  margin: 5rem auto;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+.headshot {
+  height: 140px;
+  padding: 0.5rem;
+  margin: 2rem;
+  float: left;
+  background-color: white;
+}
+
+#inputBox {
+  clear: both;
+}
+
+#messageBox {
+  margin-top: 20px;
+  min-height: 50px;
+  background-color: white;
+  border: 2px solid black;
+  padding: 5px;
+}
+
+@media screen and (max-width: 800px) {
+  nav h2 {
+    font-size: 2rem;
+  }
+}
