@@ -38,10 +38,10 @@ function serverError (content) {
 new (require("ws").Server)({ port: PORT }).on("connection", function (socket) {
   socket.on("message", function (msg) {
     if(rateLimit(socket)) {
-      socket.send(serverError(
-        "Rate limit: You may only send 1 message per " + RATE_LIMIT + "ms"
-      ));
       try {
+        socket.send(serverError(
+          "Rate limit: You may only send 1 message per " + RATE_LIMIT + "ms"
+        ));
         socket.close();
       } catch (e) {
         console.error("tried to close a socket that the client already closed");
@@ -52,7 +52,11 @@ new (require("ws").Server)({ port: PORT }).on("connection", function (socket) {
 
     var validationFail = validate(msg);
     if (validationFail) {
-      socket.send(serverError(validationFail));
+      try {
+        socket.send(serverError(validationFail));
+      } catch () {
+        console.error("tried to close a socket that the client already closed");
+      }
       console.log(msg + " -> " + validationFail);
       return;
     } else {
